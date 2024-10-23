@@ -1,0 +1,6 @@
+#folders
+venv
+media/profile_pics/
+# db
+db.sqlite3
+
