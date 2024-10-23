@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+from django.contrib.auth import get_user_model
 
 
 class UsersConfig(AppConfig):
@@ -6,4 +7,6 @@ class UsersConfig(AppConfig):
     name = 'users'
 
     def ready(self):
-        import users.signals
+        User = get_user_model()
+        if not User.objects.filter(username='admin').exists():
+            User.objects.create_superuser('admin', 'admin@example.com', 'admin')
