@@ -22,24 +22,39 @@
 <header class="site-header">
     <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-            <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">Django Blog</a>
+            <a class="navbar-brand mr-4" href="{% url 'core-home' %}">Django Blog</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarToggle">
                 <div class="navbar-nav mr-auto">
-                    <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
-                    <a class="nav-item nav-link" href="{% url 'blog-about' %}">Sobre</a>
+                    <a class="nav-item nav-link" href="{% url 'core-home' %}">
+                        <button class="btn btn-outline-light btn-sm" type="button"><i class="fa-solid fa-blog"> Blog</i></button>
+                    </a>
+                    <a class="nav-item nav-link" href="{% url 'core-about' %}">
+                        <button class="btn btn-outline-light btn-sm" type="button"><i class="fa-solid fa-question"> Sobre</i></button>
+                    </a>
                 </div>
                 <!-- Navbar Right Side -->
                 <div class="navbar-nav">
                     {% if user.is_authenticated %}
-                        <a class="nav-item nav-link" href="{% url 'post-create' %}">Nova Postagem</a>
-                        <a class="nav-item nav-link" href="{% url 'profile' %}">Perfil</a>
-                        <a class="nav-item nav-link" href="{% url 'logout' %}">Sair</a>
+                        <a class="nav-item nav-link" href="{% url 'post-create' %}">
+                            <button class="btn btn-outline-light btn-sm" type="button"><i class="fa-solid fa-pen"> Novo Post</i></button>
+                        </a>
+                        <a class="nav-item nav-link" href="{% url 'profile' %}">
+                            <button class="btn btn-outline-light btn-sm" type="button"><i class="fa-solid fa-user"> Perfil</i></button>
+                        </a>
+                        <form class="nav-item nav-link" method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button class="btn btn-outline-light btn-sm" type="submit"><i class="fa-solid fa-arrow-right-from-bracket"> Sair</i></button>
+                        </form>
                     {% else %}
-                        <a class="nav-item nav-link" href="{% url 'login' %}">Entrar</a>
-                        <a class="nav-item nav-link" href="{% url 'register' %}">Regitrar</a>
+                        <a class="nav-item nav-link" href="{% url 'login' %}">
+                            <button class="btn btn-outline-light btn-sm" type="button"><i class="fa-solid fa-arrow-right-to-bracket"> Entrar</i></button>
+                        </a>
+                        <a class="nav-item nav-link" href="{% url 'register' %}">
+                            <button class="btn btn-outline-light btn-sm" type="button"><i class="fa-solid fa-id-card"> Registrar</i></button>
+                        </a>
                     {% endif %}
                 </div>
             </div>
@@ -49,6 +64,7 @@
 <main role="main" class="container">
     <div class="row">
         <div class="col-md-8">
+
             {% if messages %}
                 {% for message in messages %}
                     <div class="alert alert-{{ message.tags }}">
@@ -76,6 +92,7 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://kit.fontawesome.com/8448dd20d3.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

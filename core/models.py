@@ -5,11 +5,17 @@ from django.urls import reverse
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=100)
-    content = models.TextField()
-    date_posted = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    tags = models.ManyToManyField('Tag', related_name='posts')
+
+    class Meta:
+        verbose_name = 'Post'
+        verbose_name_plural = 'Posts'
+
+    title = models.CharField(max_length=100, verbose_name='Título')
+    content = models.TextField(verbose_name='Conteudo')
+    created_at = models.DateTimeField(default=timezone.now, verbose_name='Data de publicação')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Autor')
+    tags = models.ManyToManyField('Tag', related_name='posts', verbose_name='Marcadores')
+
     def __str__(self):
         return self.title
 
